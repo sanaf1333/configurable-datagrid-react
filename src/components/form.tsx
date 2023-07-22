@@ -1,27 +1,31 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Col, Row, Button, Form, Input, Select } from "antd";
 import { dataArray } from "../types/data-array";
-
-const { Option } = Select;
-
 
 interface ColumnsFormProps {
   columnId: number;
   onDeleteColumn: (id: number) => void;
   onChangeColumn: (value: dataArray) => void;
+  setDisplayTable: (value: boolean)=> void;
 }
 
 const ColumnsForm: React.FC<ColumnsFormProps> = ({
   columnId,
   onDeleteColumn,
   onChangeColumn,
+  setDisplayTable
 }) => {
   const [form] = Form.useForm();
-  const [label, setLabel]= useState("");
-  const [type, setType]= useState("");
-  const [key, setKey]= useState("");
+  const [label, setLabel] = useState("");
+  const [type, setType] = useState("");
+  const [key, setKey] = useState("");
   const onReset = () => {
+    setDisplayTable(false);
     form.resetFields();
+    setLabel("");
+    setType("");
+    setKey("");
+    onChangeColumn({ columnId, label: "", type: "value", key: "" })
   };
   const handleDelete = () => {
     onDeleteColumn(columnId);
@@ -43,7 +47,11 @@ const ColumnsForm: React.FC<ColumnsFormProps> = ({
   };
 
   return (
-    <Form form={form} name="control-hooks" layout="horizontal">
+    <Form
+      form={form}
+      name={`configuration-form${columnId}`}
+      layout="horizontal"
+    >
       <Row gutter={16} justify="center">
         <Col xs={24} sm={12} md={8} lg={6}>
           <Form.Item name="label" label="Label" rules={[{ required: true }]}>
