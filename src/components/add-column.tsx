@@ -6,16 +6,25 @@ import { dataArray } from "../types/data-array";
 const AddColumns = () => {
   const [columnId, setColumnId] = useState(0);
   const [columnKeys, setColumnKeys] = useState<number[]>([]);
-  const [columnsData, setColumnsData]= useState(0);
+  const [columnsData, setColumnsData] = useState<dataArray[]>([]);
+  console.log(columnsData)
   const handleAddColumn = () => {
     setColumnId((prevCount) => prevCount + 1);
     setColumnKeys((prevKeys) => [...prevKeys, columnId]);
+    setColumnsData((prevData) => [...prevData, { columnId, label: "", type: "", key: "" }]);
   };
 
   const handleDeleteColumn = (columnId: number) => {
     setColumnKeys((prevKeys) => prevKeys.filter((key) => key !== columnId));
+    setColumnsData((prevData) => prevData.filter((data) => data.columnId !== columnId));
   };
- 
+
+  const handleSetColumnData = (columnData: dataArray) => {
+    setColumnsData((prevData) =>
+      prevData.map((data) => (data.columnId === columnData.columnId ? columnData : data))
+    );
+  };
+
   const renderColumnsForms = () => {
     const columnsForms = [];
     for (let i = 0; i < columnKeys.length; i++) {
@@ -25,15 +34,14 @@ const AddColumns = () => {
           key={key}
           columnId={key}
           onDeleteColumn={handleDeleteColumn}
+          onChangeColumn={handleSetColumnData}
         />
       );
     }
     return columnsForms;
   };
 
-  const handleSetConfigurations = () => {
-
-  }
+  const handleSetConfigurations = () => {};
 
   return (
     <div>
@@ -41,9 +49,10 @@ const AddColumns = () => {
         Add Column
       </Button>
       {renderColumnsForms()}
-      <Button type="primary" onClick={handleSetConfigurations}>
+
+      {columnKeys.length > 0 && <Button type="primary" onClick={handleSetConfigurations}>
         Set Configurations
-      </Button>
+      </Button>}
     </div>
   );
 };

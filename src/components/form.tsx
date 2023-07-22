@@ -1,15 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import { Col, Row, Button, Form, Input, Select } from "antd";
-const { Option } = Select;
 import { dataArray } from "../types/data-array";
-interface ColumnsFormProps{
-    columnId: number;
-    onDeleteColumn: (id: number) => void;
+
+const { Option } = Select;
+
+
+interface ColumnsFormProps {
+  columnId: number;
+  onDeleteColumn: (id: number) => void;
+  onChangeColumn: (value: dataArray) => void;
 }
 
-const ColumnsForm: React.FC<ColumnsFormProps> = ({ columnId, onDeleteColumn }) => {
+const ColumnsForm: React.FC<ColumnsFormProps> = ({
+  columnId,
+  onDeleteColumn,
+  onChangeColumn,
+}) => {
   const [form] = Form.useForm();
-  const columnData: dataArray = { columnId, label: "", type: "", key: "" };
+  const [label, setLabel]= useState("");
+  const [type, setType]= useState("");
+  const [key, setKey]= useState("");
   const onReset = () => {
     form.resetFields();
   };
@@ -17,15 +27,21 @@ const ColumnsForm: React.FC<ColumnsFormProps> = ({ columnId, onDeleteColumn }) =
     onDeleteColumn(columnId);
   };
 
-  const handleLabelChange = (label: string) =>{
-    columnData.label=label;
-  }
-  const handleTypeChange = (type: string) =>{
-    columnData.type=type;
-  }
-  const handleKeyChange = (key: string) =>{
-    columnData.key=key;
-  }
+  const handleLabelChange = (value: string) => {
+    setLabel(value);
+    onChangeColumn({ columnId, label: value, type, key });
+  };
+
+  const handleTypeChange = (value: string) => {
+    setType(value);
+    onChangeColumn({ columnId, label, type: value, key });
+  };
+
+  const handleKeyChange = (value: string) => {
+    setKey(value);
+    onChangeColumn({ columnId, label, type, key: value });
+  };
+
   return (
     <Form form={form} name="control-hooks" layout="horizontal">
       <Row gutter={16} justify="center">
@@ -54,9 +70,7 @@ const ColumnsForm: React.FC<ColumnsFormProps> = ({ columnId, onDeleteColumn }) =
             Delete
           </Button>
         </Col>
-        
       </Row>
-      
     </Form>
   );
 };
