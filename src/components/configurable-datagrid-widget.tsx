@@ -14,10 +14,11 @@ const ConfigurationDatagridWidget = () => {
     <div>
       <Collapse
         size="large"
+        style={{backgroundColor: "#a2c7f2"}}
         items={[
           {
             key: "1",
-            label: "This is large size panel header",
+            label: <span style={{fontFamily: "Railway"}}>Datagrid Configurations</span>,
             children: (
               <ConfigurationModalForm
                 setFetchedData={setFetchedData}

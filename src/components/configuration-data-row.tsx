@@ -22,19 +22,19 @@ const ConfigurationDataRowComponent: React.FC<
       <Row gutter={16} justify="center" style={{ marginBottom: "10px" }}>
         <Col xs={24} sm={12} md={8} lg={6}>
           <Form.Item name="label" label="Label" rules={[{ required: true }]}>
-            <Input onChange={(e) => handleLabelChange(e.target.value)} />
+            <Input placeholder="Label" onChange={(e) => handleLabelChange(e.target.value)} />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12} md={8} lg={6}>
           <Form.Item name="key" label="Key" rules={[{ required: true }]}>
-            <Input onChange={(e) => handleKeyChange(e.target.value)} />
+            <Input placeholder="Key" onChange={(e) => handleKeyChange(e.target.value)} />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12} md={8} lg={6}>
           <Form.Item name="type" label="Type" rules={[{ required: true }]}>
             <Select
               onChange={(value) => handleTypeChange(value)}
-              placeholder="Select a data type"
+              placeholder={<span style={{display: "flex", justifyContent: "left"}}>Data type</span>}
             >
               {dataTypes.map((dataType) => (
                 <Select.Option key={dataType} value={dataType}>

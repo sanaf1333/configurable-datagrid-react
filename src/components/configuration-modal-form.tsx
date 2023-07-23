@@ -14,17 +14,24 @@ const ConfigurationModalFormComponent: React.FC<
   selectOptions,
   handleSetConfigurations,
 }) => {
+  const inputStyle = {
+    fontFamily: "Railway", // Match the font family with title and subtitle
+    fontSize: "16px", // Match the font size with title and subtitle
+    padding: "8px", // Match the padding with title and subtitle
+    width: "100%",
+  };
   return (
     <>
       <Row justify="center" align="middle" style={{ marginBottom: "10px" }}>
-        <Col span={8}>
-          <span> * Enter API URL: </span>
+        <Col span={24}>
+          <span style={{ fontFamily: "Railway", display: "flex", justifyContent: "flex-start" }}> <span style={{color: "red"}}>*&nbsp;</span>Enter API URL </span>
         </Col>
-        <Col span={16}>
+        <Col span={24}>
           <Input
             placeholder="API URL"
             required
             onChange={(e) => setApiURL(e.target.value)}
+            style={inputStyle} // Apply the custom input styles
           />
         </Col>
       </Row>
@@ -51,7 +58,7 @@ const ConfigurationModalFormComponent: React.FC<
               style={{ marginBottom: "10px" }}
             >
               <Select
-                placeholder="Select Title"
+                placeholder={<span style={{display: "flex", justifyContent: "left"}}>Select title</span>}
                 style={{ width: "100%" }}
                 options={selectOptions}
                 onChange={(value) => setTitle(value)}
@@ -64,7 +71,7 @@ const ConfigurationModalFormComponent: React.FC<
               style={{ marginBottom: "10px" }}
             >
               <Select
-                placeholder="Select Subtitle"
+                placeholder={<span style={{display: "flex", justifyContent: "left"}}>Select subtitle</span>}
                 style={{ width: "100%" }}
                 options={selectOptions}
                 onChange={(value) => setSubtitle(value)}

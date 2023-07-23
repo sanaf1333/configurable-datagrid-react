@@ -11,11 +11,11 @@ const DatagridWidget: React.FC<DatagridWidgetProps> = ({
 }) => {
   const [columns, setColumns] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 480);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 768);
+      setIsSmallScreen(window.innerWidth <= 480);
     };
 
     window.addEventListener("resize", handleResize);
@@ -37,6 +37,7 @@ const DatagridWidget: React.FC<DatagridWidgetProps> = ({
       title: config.label,
       dataIndex: config.key,
       key: config.key,
+      sorter: true,
     }));
     setColumns(tableColumns);
     // Process fetchedData to set data for the table

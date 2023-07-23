@@ -105,8 +105,9 @@ const ConfigurationModalForm: React.FC<ConfigurationModalFormProps> = ({
       setErrorVisible(false);
     }
   }, [errorVisible]);
+
   const selectOptions = [
-    { value: "", label: "Select" },
+    { value: "", label: "Not selected/Default" },
     ...columnsData
       .filter((data) => data.type && data.key && data.label)
       .map((data) => ({ value: data.key, label: data.key })),

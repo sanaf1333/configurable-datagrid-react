@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, List } from "antd";
 import { dataArray } from "../types/data-array";
 import { DatagridWidgetComponentProps } from "../types/datagrid-widget-type";
+import "../styles/configurable-datagrid-widget.module.less";
 
 const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
   columns,
@@ -11,12 +12,52 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
   title,
   subtitle,
 }) => {
+  const [sortedInfo, setSortedInfo] = useState<any>({});
+
+  const handleTableChange = (pagination: any, filters: any, sorter: any) => {
+    setSortedInfo(sorter);
+  };
+
+  // Sort the data based on sortedInfo state
+  const sortedData = React.useMemo(() => {
+    if (!sortedInfo.columnKey || !sortedInfo.order) {
+      return data;
+    }
+
+    const column = columns.find((col) => col.dataIndex === sortedInfo.columnKey);
+    if (!column) {
+      return data;
+    }
+
+    const { dataIndex } = column;
+    const compareFunction = (a: any, b: any) => {
+      const aValue = a[dataIndex];
+      const bValue = b[dataIndex];
+
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return aValue.localeCompare(bValue);
+      }
+
+      return aValue - bValue;
+    };
+
+    const sortedData = [...data].sort((a, b) => {
+      if (sortedInfo.order === "ascend") {
+        return compareFunction(a, b);
+      } else {
+        return compareFunction(b, a);
+      }
+    });
+
+    return sortedData;
+  }, [data, sortedInfo, columns]);
+
   if (isSmallScreen) {
-    const dataList = data.map((item, index) => ({
+    const dataList = sortedData.map((item, index) => ({
       title: item[title || configurationData[0]?.key],
       subtitle:
         item[
-          subtitle || configurationData[1]
+          subtitle? subtitle : configurationData[1]
             ? configurationData[1].key
             : configurationData[0].key
         ],
@@ -39,8 +80,9 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
     <div>
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={sortedData} // Use sortedData here
         scroll={{ x: "max-content" }}
+        onChange={handleTableChange} // Handle table change for sorting
       />
     </div>
   );
