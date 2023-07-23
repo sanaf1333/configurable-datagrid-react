@@ -71,10 +71,14 @@ const ConfigurationModalFormComponent: React.FC<
               />
             </Form.Item>
           </Form>
-        <Col span={24}>
-          <Button type="primary" onClick={handleSetConfigurations} style={{width: "100%"}}>
-            Set Configurations
-          </Button>
+          <Col span={24}>
+            <Button
+              type="primary"
+              onClick={handleSetConfigurations}
+              style={{ width: "100%" }}
+            >
+              Set Configurations
+            </Button>
           </Col>
         </>
       )}

@@ -26,22 +26,33 @@ const DatagridWidget: React.FC<DatagridWidgetProps> = ({
   }, []);
 
   useEffect(() => {
+    // Filter out the keys that are present in fetchedData
+    const keysPresentInFetchedData = configurationData.filter((config) => {
+      const { key } = config;
+      return fetchedData.hasOwnProperty(key);
+    });
+
     // Process configurationData to create columns for the table
-    const tableColumns = configurationData.map((config) => ({
+    const tableColumns = keysPresentInFetchedData.map((config) => ({
       title: config.label,
       dataIndex: config.key,
       key: config.key,
     }));
     setColumns(tableColumns);
-
     // Process fetchedData to set data for the table
     const tableData: any[] = [];
-    const dataLength = fetchedData[configurationData[0]?.key]?.length || 0;
+    const dataLength =
+      fetchedData[keysPresentInFetchedData[0]?.key]?.length || 0;
     for (let i = 0; i < dataLength; i++) {
       const rowData: any = {};
-      configurationData.forEach((config) => {
+      keysPresentInFetchedData.forEach((config) => {
         const { key } = config;
-        rowData[key] = fetchedData[key][i];
+        if (fetchedData[key]?.[i]) {
+          rowData[key] = fetchedData[key][i];
+        } else {
+          // Handle missing data for the key (optional)
+          rowData[key] = ""; // You can set a default value or handle it as needed
+        }
       });
       tableData.push(rowData);
     }

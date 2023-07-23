@@ -11,8 +11,6 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
   title,
   subtitle,
 }) => {
-  
-
   if (isSmallScreen) {
     const dataList = data.map((item, index) => ({
       title: item[title || configurationData[0]?.key],
