@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { dataArray } from "../types/data-array";
 import DatagridWidgetComponent from "../components/datagrid-widget";
 import { DatagridWidgetProps } from "../types/datagrid-widget-type";
 
@@ -51,8 +50,8 @@ const DatagridWidget: React.FC<DatagridWidgetProps> = ({
         if (fetchedData[key]?.[i]) {
           rowData[key] = fetchedData[key][i];
         } else {
-          // Handle missing data for the key (optional)
-          rowData[key] = ""; // You can set a default value or handle it as needed
+          // Handle missing data for the key 
+          rowData[key] = ""; 
         }
       });
       tableData.push(rowData);

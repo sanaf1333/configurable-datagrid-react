@@ -1,5 +1,6 @@
 import { dataArray } from "./data-array";
 import { FormInstance } from "antd/lib/form";
+
 export interface ConfigurationDataRowProps {
     columnId: number;
     onDeleteColumn: (id: number) => void;

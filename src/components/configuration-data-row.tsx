@@ -2,6 +2,8 @@ import React from "react";
 import { Col, Row, Button, Form, Input, Select } from "antd";
 import { ConfigurationDataRowComponentProps } from "../types/configuration-data-row-type";
 import { dataTypes } from "../utils/data-types";
+import '../styles/configurable-datagrid-widget.css';
+
 const ConfigurationDataRowComponent: React.FC<
   ConfigurationDataRowComponentProps
 > = ({
@@ -19,7 +21,7 @@ const ConfigurationDataRowComponent: React.FC<
       name={`configuration-form${columnId}`}
       layout="horizontal"
     >
-      <Row gutter={16} justify="center" style={{ marginBottom: "10px" }}>
+      <Row gutter={16} justify="center" className="configurationRow">
         <Col xs={24} sm={12} md={8} lg={6}>
           <Form.Item name="label" label="Label" rules={[{ required: true }]}>
             <Input placeholder="Label" onChange={(e) => handleLabelChange(e.target.value)} />
@@ -49,7 +51,7 @@ const ConfigurationDataRowComponent: React.FC<
             block
             htmlType="button"
             onClick={onReset}
-            style={{ backgroundColor: "gray" }}
+            className="resetButton"
           >
             Reset
           </Button>
@@ -59,7 +61,7 @@ const ConfigurationDataRowComponent: React.FC<
             block
             htmlType="button"
             onClick={handleDelete}
-            style={{ backgroundColor: "red" }}
+            className="deleteButton"
           >
             Delete
           </Button>

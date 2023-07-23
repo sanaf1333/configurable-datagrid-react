@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Input, Row, Col, Select, Form } from "antd";
 import { ConfigurationModalFormComponentProps } from "../types/configuration-modal-form-type";
+import '../styles/configurable-datagrid-widget.css';
 
 const ConfigurationModalFormComponent: React.FC<
   ConfigurationModalFormComponentProps
@@ -14,24 +15,19 @@ const ConfigurationModalFormComponent: React.FC<
   selectOptions,
   handleSetConfigurations,
 }) => {
-  const inputStyle = {
-    fontFamily: "Railway", // Match the font family with title and subtitle
-    fontSize: "16px", // Match the font size with title and subtitle
-    padding: "8px", // Match the padding with title and subtitle
-    width: "100%",
-  };
+  
   return (
     <>
-      <Row justify="center" align="middle" style={{ marginBottom: "10px" }}>
+      <Row justify="center" align="middle" className="configurationRow">
         <Col span={24}>
-          <span style={{ fontFamily: "Railway", display: "flex", justifyContent: "flex-start" }}> <span style={{color: "red"}}>*&nbsp;</span>Enter API URL </span>
+          <span className="APIURLText"> <span className="requiredMark">*&nbsp;</span>Enter API URL </span>
         </Col>
         <Col span={24}>
           <Input
             placeholder="API URL"
             required
             onChange={(e) => setApiURL(e.target.value)}
-            style={inputStyle} // Apply the custom input styles
+            
           />
         </Col>
       </Row>
@@ -40,7 +36,7 @@ const ConfigurationModalFormComponent: React.FC<
           <Button
             type="primary"
             onClick={handleAddColumn}
-            style={{ marginBottom: "10px", width: "100%" }}
+            className="addColumnButton"
           >
             Add Column
           </Button>
@@ -52,27 +48,27 @@ const ConfigurationModalFormComponent: React.FC<
         <>
           <Form layout="vertical">
             <Form.Item
-              label="Title"
+              label={<span className="titleLabel">Title</span>}
               labelCol={{ span: 0 }}
               wrapperCol={{ span: 24 }}
-              style={{ marginBottom: "10px" }}
+              className="configurationRow"
             >
               <Select
-                placeholder={<span style={{display: "flex", justifyContent: "left"}}>Select title</span>}
-                style={{ width: "100%" }}
+                placeholder={<span className="selectTitle">Select title</span>}
+                className="select"
                 options={selectOptions}
                 onChange={(value) => setTitle(value)}
               />
             </Form.Item>
             <Form.Item
-              label="Subtitle"
+              label={<span className="titleLabel">Subtitle</span>}
               labelCol={{ span: 0 }}
               wrapperCol={{ span: 24 }}
-              style={{ marginBottom: "10px" }}
+              className="configurationRow"
             >
               <Select
-                placeholder={<span style={{display: "flex", justifyContent: "left"}}>Select subtitle</span>}
-                style={{ width: "100%" }}
+                placeholder={<span className="selectTitle">Select subtitle</span>}
+                className="select"
                 options={selectOptions}
                 onChange={(value) => setSubtitle(value)}
               />
@@ -82,7 +78,7 @@ const ConfigurationModalFormComponent: React.FC<
             <Button
               type="primary"
               onClick={handleSetConfigurations}
-              style={{ width: "100%" }}
+              className="addColumnButton"
             >
               Set Configurations
             </Button>

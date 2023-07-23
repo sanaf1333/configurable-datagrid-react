@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Table, List } from "antd";
 import { dataArray } from "../types/data-array";
 import { DatagridWidgetComponentProps } from "../types/datagrid-widget-type";
-import "../styles/configurable-datagrid-widget.module.less";
 
 const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
   columns,
@@ -18,7 +17,6 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
     setSortedInfo(sorter);
   };
 
-  // Sort the data based on sortedInfo state
   const sortedData = React.useMemo(() => {
     if (!sortedInfo.columnKey || !sortedInfo.order) {
       return data;
@@ -80,9 +78,9 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
     <div>
       <Table
         columns={columns}
-        dataSource={sortedData} // Use sortedData here
+        dataSource={sortedData} 
         scroll={{ x: "max-content" }}
-        onChange={handleTableChange} // Handle table change for sorting
+        onChange={handleTableChange} 
       />
     </div>
   );

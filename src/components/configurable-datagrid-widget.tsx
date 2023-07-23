@@ -3,6 +3,7 @@ import { Collapse } from "antd";
 import ConfigurationModalForm from "../containers/configuration-modal-form";
 import { dataArray } from "../types/data-array";
 import DatagridWidget from "../containers/datagrid-widget";
+import '../styles/configurable-datagrid-widget.css';
 
 const ConfigurationDatagridWidget = () => {
   const [fetchedData, setFetchedData] = useState<Record<string, any[]>>({});
@@ -10,15 +11,21 @@ const ConfigurationDatagridWidget = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [displayTable, setDisplayTable] = useState(false);
+  const [activeKey, setActiveKey] = useState<string | string[]>(["1"]); 
+  const handleCollapseChange = (keys: string | string[]) => {
+    setActiveKey(keys);
+  };
   return (
     <div>
       <Collapse
         size="large"
-        style={{backgroundColor: "#a2c7f2"}}
+        className='collapseHeader'
+        activeKey={activeKey}
+        onChange={handleCollapseChange}
         items={[
           {
             key: "1",
-            label: <span style={{fontFamily: "Railway"}}>Datagrid Configurations</span>,
+            label: <span className='collapseHeaderText'>Set Datagrid Configurations</span>,
             children: (
               <ConfigurationModalForm
                 setFetchedData={setFetchedData}
