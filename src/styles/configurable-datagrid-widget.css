@@ -1,0 +1,64 @@
+
+:root {
+    --heading: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --subheading: Georgia, 'Times New Roman', Times, serif;
+    --fontSize: 16px;
+  }
+.collapseHeader{
+    background-color: rgb(203, 226, 247);
+}
+
+.collapseHeaderText{
+    font-family: var(--heading);
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.configurationRow{
+    margin-bottom: 10px;
+}
+
+.resetButton{
+    background-color: rgb(187, 187, 187);
+    color: white;
+}
+
+.deleteButton{
+    background-color: rgb(217, 33, 33);
+    color: white;
+}
+
+.APIURLText{
+    display: flex;
+    justify-content: flex-start;
+    font-family: var(--subheading);
+    font-size: var(--fontSize);
+}
+
+.requiredMark{
+    color: red;
+}
+
+.addColumnButton{
+    width: 100%;
+    margin-bottom: 10px;
+    font-family: var(--subheading);
+}
+
+.titleLabel{
+    font-family: var(--subheading);
+    font-size: var(--fontSize);
+}
+
+.selectTitle{
+    display: flex;
+    justify-content: left;
+}
+
+.select{
+    width: 100%;
+}
+
+.tooltip{
+    text-align: center !important;
+}
