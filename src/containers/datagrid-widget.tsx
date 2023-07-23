@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table, List } from "antd";
 import { dataArray } from "../types/data-array";
+import DatagridWidgetComponent from "../components/datagrid-widget";
+import { DatagridWidgetProps } from "../types/datagrid-widget-type";
 
-interface DatagridTableProps {
-  fetchedData: any;
-  configurationData: dataArray[];
-  title: string;
-  subtitle: string;
-}
-
-const DatagridTable: React.FC<DatagridTableProps> = ({
+const DatagridWidget: React.FC<DatagridWidgetProps> = ({
   fetchedData,
   configurationData,
   title,
@@ -54,39 +48,16 @@ const DatagridTable: React.FC<DatagridTableProps> = ({
     setData(tableData);
   }, [fetchedData, configurationData]);
 
-
-  if (isSmallScreen) {
-    const dataList = data.map((item) => ({
-      title: item[title || configurationData[0]?.key],
-      subtitle:
-        item[
-          subtitle || configurationData[1]
-            ? configurationData[1].key
-            : configurationData[0].key
-        ],
-    }));
-
-    return (
-      <List
-        dataSource={dataList}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta title={item.title} description={item.subtitle} />
-          </List.Item>
-        )}
-      />
-    );
-  }
-
   return (
-    <div>
-      <Table
-        columns={columns}
-        dataSource={data}
-        scroll={{ x: "max-content" }}
-      />
-    </div>
+    <DatagridWidgetComponent
+      columns={columns}
+      data={data}
+      isSmallScreen={isSmallScreen}
+      configurationData={configurationData}
+      title={title}
+      subtitle={subtitle}
+    />
   );
 };
 
-export default DatagridTable;
+export default DatagridWidget;

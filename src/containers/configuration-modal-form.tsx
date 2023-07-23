@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Input,
-  Row,
-  Col,
-  Select,
-  Alert,
-  notification,
-} from "antd";
-
-import ColumnsForm from "./form";
+import { notification } from "antd";
+import ConfigurationDataRow from "./configuration-data-row";
 import { dataArray } from "../types/data-array";
 import FetchAPIData from "../services/fetch-API-data";
+import ConfigurationModalFormComponent from "../components/configuration-modal-form";
+import { ConfigurationModalFormProps } from "../types/configuration-modal-form-type";
 
-interface AddColumnsProps{
-    setFetchedData: (data: Record<string, any[]>)=> void;
-    setConfigurationData: (data: dataArray[])=> void;
-    setTitle: (value: string)=> void;
-    setSubtitle: (value: string)=> void;
-    setDisplayTable: (value: boolean)=> void;
-}
-
-const AddColumns: React.FC<AddColumnsProps> = ({setFetchedData, setConfigurationData, setTitle, setSubtitle, setDisplayTable}) => {
+const ConfigurationModalForm: React.FC<ConfigurationModalFormProps> = ({
+  setFetchedData,
+  setConfigurationData,
+  setTitle,
+  setSubtitle,
+  setDisplayTable,
+}) => {
   const [columnId, setColumnId] = useState(0);
   const [columnKeys, setColumnKeys] = useState<number[]>([]);
   const [columnsData, setColumnsData] = useState<dataArray[]>([]);
@@ -56,12 +47,13 @@ const AddColumns: React.FC<AddColumnsProps> = ({setFetchedData, setConfiguration
   useEffect(() => {
     setConfigurationData(columnsData);
   }, [columnsData, setConfigurationData]);
-  const renderColumnsForms = () => {
+
+  const renderConfigurationRows = () => {
     const columnsForms = [];
     for (let i = 0; i < columnKeys.length; i++) {
       let key = columnKeys[i];
       columnsForms.push(
-        <ColumnsForm
+        <ConfigurationDataRow
           key={key}
           columnId={key}
           onDeleteColumn={handleDeleteColumn}
@@ -79,18 +71,19 @@ const AddColumns: React.FC<AddColumnsProps> = ({setFetchedData, setConfiguration
     );
 
     if (isEmptyColumnData || apiURL.trim() === "" || !urlRegex.test(apiURL)) {
-        console.log("hello what")
       setErrorVisible(true);
       return;
     }
     try {
-        const fetchedData = await FetchAPIData({ APIURL: apiURL, columns: columnsData });
-        setFetchedData(fetchedData);
-        setDisplayTable(true);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    
+      const fetchedData = await FetchAPIData({
+        APIURL: apiURL,
+        columns: columnsData,
+      });
+      setFetchedData(fetchedData);
+      setDisplayTable(true);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   useEffect(() => {
@@ -113,71 +106,24 @@ const AddColumns: React.FC<AddColumnsProps> = ({setFetchedData, setConfiguration
     }
   }, [errorVisible]);
   const selectOptions = [
-    { value: "", label: "Select" }, 
+    { value: "", label: "Select" },
     ...columnsData
       .filter((data) => data.type && data.key && data.label)
       .map((data) => ({ value: data.key, label: data.key })),
   ];
-  
+
   return (
-    <>
-      <Row justify="center" align="middle" style={{ marginBottom: "10px" }}>
-        <Col span={4}>
-          <span> * Enter API URL: </span>
-        </Col>
-        <Col span={20}>
-          <Input
-            placeholder="API URL"
-            required
-            onChange={(e) => setApiURL(e.target.value)}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col span={24}>
-          <Button type="primary" onClick={handleAddColumn}>
-            Add Column
-          </Button>
-        </Col>
-      </Row>
-      {renderColumnsForms()}
-
-      {columnKeys.length > 0 && (
-        <>
-          <Row justify="center" align="middle" style={{ marginBottom: "10px" }}>
-            <Col span={4}>
-              <span> Title: </span>
-            </Col>
-            <Col span={16}>
-              <Select
-                placeholder="Select Title"
-                style={{ width: "100%" }}
-                options={selectOptions}
-                onChange={(value) => setTitle(value)}
-              />
-            </Col>
-          </Row>
-          <Row justify="center" align="middle" style={{ marginBottom: "10px" }}>
-            <Col span={4}>
-              <span>Subtitle: </span>
-            </Col>
-            <Col span={16}>
-              <Select
-                placeholder="Select Subtitle"
-                style={{ width: "100%" }}
-                options={selectOptions}
-                onChange={(value) => setSubtitle(value)}
-              />
-            </Col>
-          </Row>
-
-          <Button type="primary" onClick={handleSetConfigurations}>
-            Set Configurations
-          </Button>
-        </>
-      )}
-    </>
+    <ConfigurationModalFormComponent
+      setApiURL={setApiURL}
+      setTitle={setTitle}
+      setSubtitle={setSubtitle}
+      handleAddColumn={handleAddColumn}
+      renderConfigurationRows={renderConfigurationRows}
+      columnKeys={columnKeys}
+      selectOptions={selectOptions}
+      handleSetConfigurations={handleSetConfigurations}
+    />
   );
 };
 
-export default AddColumns;
+export default ConfigurationModalForm;

@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import { Collapse } from "antd";
-import AddColumns from "./add-column";
+import ConfigurationModalForm from "../containers/configuration-modal-form";
 import { dataArray } from "../types/data-array";
-import DatagridTable from "./datagrid-table";
+import DatagridWidget from "../containers/datagrid-widget";
 
-const ConfigurationForm = () => {
+const ConfigurationDatagridWidget = () => {
     const [fetchedData, setFetchedData]= useState<Record<string, any[]>>({});
     const [configurationData, setConfigurationData]= useState<dataArray[]>([]);
     const [title, setTitle]= useState("");
@@ -18,16 +18,16 @@ const ConfigurationForm = () => {
           {
             key: "1",
             label: "This is large size panel header",
-            children: <AddColumns setFetchedData={setFetchedData} setConfigurationData={setConfigurationData}
+            children: <ConfigurationModalForm setFetchedData={setFetchedData} setConfigurationData={setConfigurationData}
             setTitle={setTitle} setSubtitle={setSubtitle} setDisplayTable={setDisplayTable} />,
           },
         ]}
       />
       {displayTable && 
-      <DatagridTable fetchedData={fetchedData} configurationData={configurationData} title={title} subtitle={subtitle} />
+      <DatagridWidget fetchedData={fetchedData} configurationData={configurationData} title={title} subtitle={subtitle} />
       }
       </div>
   );
 };
 
-export default ConfigurationForm;
+export default ConfigurationDatagridWidget;

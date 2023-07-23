@@ -2,12 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Button } from 'antd';
-import ConfigurationForm from './components/configuration-form';
+import ConfigurationDatagridWidget from './components/configurable-datagrid-widget';
 function App() {
   return (
     <div className="App">
       <Button type='primary'>sana</Button>
-      <ConfigurationForm />
+      <ConfigurationDatagridWidget />
     </div>
   );
 }
