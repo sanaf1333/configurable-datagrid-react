@@ -1,12 +1,12 @@
 export const dataTypes = [
-    "string",
-    "number",
-    "boolean",
-    "object",
-    "array",
-    "null",
-    "undefined",
-    "bigint",
-    "date",
-    "symbol",
-  ];
+  "string",
+  "number",
+  "boolean",
+  "object",
+  "array",
+  "null",
+  "undefined",
+  "bigint",
+  "date",
+  "symbol",
+];

@@ -50,8 +50,8 @@ const DatagridWidget: React.FC<DatagridWidgetProps> = ({
         if (fetchedData[key]?.[i]) {
           rowData[key] = fetchedData[key][i];
         } else {
-          // Handle missing data for the key 
-          rowData[key] = ""; 
+          // Handle missing data for the key
+          rowData[key] = "";
         }
       });
       tableData.push(rowData);

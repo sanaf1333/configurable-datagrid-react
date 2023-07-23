@@ -22,7 +22,9 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
       return data;
     }
 
-    const column = columns.find((col) => col.dataIndex === sortedInfo.columnKey);
+    const column = columns.find(
+      (col) => col.dataIndex === sortedInfo.columnKey
+    );
     if (!column) {
       return data;
     }
@@ -55,7 +57,9 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
       title: item[title || configurationData[0]?.key],
       subtitle:
         item[
-          subtitle? subtitle : configurationData[1]
+          subtitle
+            ? subtitle
+            : configurationData[1]
             ? configurationData[1].key
             : configurationData[0].key
         ],
@@ -78,9 +82,9 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
     <div>
       <Table
         columns={columns}
-        dataSource={sortedData} 
+        dataSource={sortedData}
         scroll={{ x: "max-content" }}
-        onChange={handleTableChange} 
+        onChange={handleTableChange}
       />
     </div>
   );

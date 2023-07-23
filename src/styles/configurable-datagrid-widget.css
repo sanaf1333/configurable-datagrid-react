@@ -58,3 +58,7 @@
 .select{
     width: 100%;
 }
+
+.tooltip{
+    text-align: center !important;
+}
