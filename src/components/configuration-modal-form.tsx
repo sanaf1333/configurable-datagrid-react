@@ -83,7 +83,7 @@ const ConfigurationModalFormComponent: React.FC<
               onClick={handleSetConfigurations}
               className="addColumnButton"
             >
-              Set Configurations
+              Generate Datagrid
             </Button>
           </Col>
         </>
