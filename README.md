@@ -51,7 +51,8 @@ Configure the data grid to show the following columns:
   { "label": "Category", "key": "category", "type": "string" },
   { "label": "Amount", "key": "amount", "type": "number" },
   { "label": "Created At", "key": "created_at", "type": "date" }
-]```
+]
+```
 
 2. API Endpoint: https://jsonplaceholder.typicode.com/posts
 
