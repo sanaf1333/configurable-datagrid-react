@@ -13,16 +13,16 @@ To clone and run the app locally, follow these steps:
 
 2. Navigate to the project directory:
 
-cd <project_directory>
+`cd <project_directory>`
 
 
 3. Install the dependencies:
 
-npm install
+`npm install`
 
 4. Run the app:
 
-npm start
+`npm start`
 
 The app will be running locally at `http://localhost:3000`.
 
@@ -53,3 +53,13 @@ Configure the data grid to show the following columns:
   { "label": "Created At", "key": "created_at", "type": "date" }
 ]
 
+2. API Endpoint: https://jsonplaceholder.typicode.com/posts
+
+Configure the data grid to show the following columns:
+
+```json
+[
+  { "label": "User ID", "key": "userId", "type": "number" },
+  { "label": "Title", "key": "title", "type": "string" },
+  { "label": "Body", "key": "body", "type": "string" }
+]
