@@ -8,7 +8,7 @@ To clone and run the app locally, follow these steps:
 
 1. Clone the repository from GitHub:
 
-`git clone [<repository_url>](https://github.com/sanaf1333/configurable-datagrid-react.git)`
+`git clone https://github.com/sanaf1333/configurable-datagrid-react.git`
 
 
 2. Navigate to the project directory: 
