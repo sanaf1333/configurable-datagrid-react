@@ -1,4 +1,4 @@
-# Configurable DataGrid Widget
+# Configurable Data Grid Widget
 
 This project is a configurable data grid widget built using ReactJS and TypeScript. The widget allows you to create a data grid with various columns and data types. The app generates a data table according to the columns and data types.
 
