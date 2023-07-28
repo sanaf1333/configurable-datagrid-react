@@ -64,3 +64,18 @@ Configure the data grid to show the following columns:
   { "label": "Title", "key": "title", "type": "string" },
   { "label": "Body", "key": "body", "type": "string" }
 ]
+```
+
+3. API Endpoint: https://reqres.in/api/users
+
+Configure the data grid to show the following columns:
+
+```json
+[
+  { "label": "ID", "key": "id", "type": "number" },
+  { "label": "First Name", "key": "first_name", "type": "string" },
+  { "label": "Last Name", "key": "last_name", "type": "string" },
+  { "label": "Email", "key": "email", "type": "string" },
+  { "label": "Avatar", "key": "avatar", "type": "string" }
+]
+```
