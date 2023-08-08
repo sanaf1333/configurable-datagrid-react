@@ -17,15 +17,15 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
     setSortedInfo(sorter);
   };
 
-//change color of negative values to red
+  //change color of negative values to red
   const renderIntegerColumn = (value: number) => {
     const textStyle = {
       color: value < 0 ? "red" : "blue",
     };
     return <span style={textStyle}>{value}</span>;
   };
-//updated column definition for antd table
-  const updatedColumns = columns.map(column => {
+  //updated column definition for antd table
+  const updatedColumns = columns.map((column) => {
     if (column.type === "number") {
       return {
         ...column,
@@ -89,7 +89,30 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
         dataSource={dataList}
         renderItem={(item) => (
           <List.Item key={item.key}>
-            <List.Item.Meta title={item.title} description={item.subtitle} />
+            <List.Item.Meta
+              title={
+                typeof item.title === "number" ? (
+                  item.title > 0 ? (
+                    <span style={{ color: "blue" }}>{item.title}</span>
+                  ) : (
+                    <span style={{ color: "red" }}>{item.title}</span>
+                  )
+                ) : (
+                  <span>{item.title}</span>
+                )
+              }
+              description={
+                typeof item.subtitle === "number" ? (
+                  item.subtitle > 0 ? (
+                    <span style={{ color: "blue" }}>{item.subtitle}</span>
+                  ) : (
+                    <span style={{ color: "red" }}>{item.subtitle}</span>
+                  )
+                ) : (
+                  <span>{item.subtitle}</span>
+                )
+              }
+            />
           </List.Item>
         )}
       />
