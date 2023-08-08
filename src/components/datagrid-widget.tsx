@@ -17,6 +17,24 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
     setSortedInfo(sorter);
   };
 
+//change color of negative values to red
+  const renderIntegerColumn = (value: number) => {
+    const textStyle = {
+      color: value < 0 ? "red" : "blue",
+    };
+    return <span style={textStyle}>{value}</span>;
+  };
+//updated column definition for antd table
+  const updatedColumns = columns.map(column => {
+    if (column.type === "number") {
+      return {
+        ...column,
+        render: (text: any) => renderIntegerColumn(text),
+      };
+    }
+    return column;
+  });
+
   const sortedData = React.useMemo(() => {
     if (!sortedInfo.columnKey || !sortedInfo.order) {
       return data;
@@ -81,7 +99,7 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
   return (
     <div>
       <Table
-        columns={columns}
+        columns={updatedColumns}
         dataSource={sortedData}
         scroll={{ x: "max-content" }}
         onChange={handleTableChange}

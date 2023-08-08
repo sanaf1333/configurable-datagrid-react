@@ -36,6 +36,7 @@ const DatagridWidget: React.FC<DatagridWidgetProps> = ({
       title: config.label,
       dataIndex: config.key,
       key: config.key,
+      type: config.type, //add data type to table columns data
       sorter: true,
     }));
     setColumns(tableColumns);
