@@ -26,7 +26,9 @@ const DatagridWidgetComponent: React.FC<DatagridWidgetComponentProps> = ({
   };
   //updated column definition for antd table
   const updatedColumns = columns.map((column) => {
-    if (column.type === "number") {
+    const dataIndex = column.dataIndex;
+    const fetchedDataType = typeof data[0][dataIndex];
+    if (fetchedDataType === "number") {
       return {
         ...column,
         render: (text: any) => renderIntegerColumn(text),
