@@ -18,7 +18,7 @@ const ConfigurationModalForm: React.FC<ConfigurationModalFormProps> = ({
   const [columnsData, setColumnsData] = useState<dataArray[]>([]);
   const [apiURL, setApiURL] = useState("");
   const [errorVisible, setErrorVisible] = useState(false);
-
+  const [isLoading, setIsLoading]= useState(false);
   const handleAddColumn = () => {
     setDisplayTable(false);
     setColumnId((prevCount) => prevCount + 1);
@@ -75,6 +75,7 @@ const ConfigurationModalForm: React.FC<ConfigurationModalFormProps> = ({
       return;
     }
     try {
+      setIsLoading(true);
       const fetchedData = await FetchAPIData({
         APIURL: apiURL,
         columns: columnsData,
@@ -83,6 +84,9 @@ const ConfigurationModalForm: React.FC<ConfigurationModalFormProps> = ({
       setDisplayTable(true);
     } catch (error) {
       console.error("Error fetching data:", error);
+    }
+    finally{
+      setIsLoading(false);
     }
   };
 
@@ -123,6 +127,7 @@ const ConfigurationModalForm: React.FC<ConfigurationModalFormProps> = ({
       columnKeys={columnKeys}
       selectOptions={selectOptions}
       handleSetConfigurations={handleSetConfigurations}
+      isLoading={isLoading}
     />
   );
 };

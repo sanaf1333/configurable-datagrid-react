@@ -17,4 +17,5 @@ export interface ConfigurationModalFormComponentProps {
   columnKeys: number[];
   selectOptions: any;
   handleSetConfigurations: () => void;
+  isLoading: boolean;
 }
