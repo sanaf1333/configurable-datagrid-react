@@ -15,6 +15,7 @@ const ConfigurationModalFormComponent: React.FC<
   columnKeys,
   selectOptions,
   handleSetConfigurations,
+  isLoading,
 }) => {
   return (
     <>
@@ -82,6 +83,7 @@ const ConfigurationModalFormComponent: React.FC<
               type="primary"
               onClick={handleSetConfigurations}
               className="addColumnButton"
+              loading={isLoading}
             >
               Generate Datagrid
             </Button>

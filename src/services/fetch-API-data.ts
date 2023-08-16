@@ -10,7 +10,7 @@ interface FetchAPIDataProps {
 
 const FetchAPIData = async ({ APIURL, columns }: FetchAPIDataProps) => {
   try {
-    const response = await axios.get(APIURL);
+    const response = await axios.get(APIURL, {timeout: 10000});
     const data = response.data;
     const processedData: Record<string, any[]> = {};
     const mismatchedDataTypes: string[] = [];
